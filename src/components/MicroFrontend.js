@@ -1,7 +1,9 @@
 import React from 'react';
 
 const renderMicroFrontend = (name, history) => {
-    window[`render${name}`](`${name}-container`, history);
+    if (window[`render${name}`]) {
+        window[`render${name}`](`${name}-container`, history);
+    }
 };
 
 export const MicroFrontEnd = ({ name, host, history }) => {
@@ -21,11 +23,12 @@ export const MicroFrontEnd = ({ name, host, history }) => {
                 script.src = `${host}${manifest['main.js']}`;
                 script.onload = renderMicroFrontend;
                 document.head.appendChild(script);
+                console.log(document.head)
             });
         return () => {
             window[`unmount${name}`](`${name}-container`);
         }
-    }, [])
+    }, [name, host, history])
 
     return <main id={`${name}-container`} />;
 }
