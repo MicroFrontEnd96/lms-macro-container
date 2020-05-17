@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { MicroFrontEnd } from './components'
 import './App.css';
 
 const {
@@ -9,22 +10,22 @@ const {
 
 
 const Leave = ({ history }) => (
-  <MicroFrontend history={history} host={leaveHost} name="Leave" />
+  <MicroFrontEnd history={history} host={leaveHost} name="Leave" />
 );
 const Sprint = ({ history }) => (
-  <MicroFrontend history={history} host={sprintHost} name="Sprint" />
+  <MicroFrontEnd history={history} host={sprintHost} name="Sprint" />
 );
 
 function App() {
   return (
     <BrowserRouter>
-      <React.Fragment>
-        <AppHeader />
+      <div className={'container-wrapper'}>
+        {/* <AppHeader /> */}
         <Switch>
           <Route exact path="/" component={Leave} />
           <Route exact path="/restaurant/:id" component={Sprint} />
         </Switch>
-      </React.Fragment>
+      </div>
     </BrowserRouter>
   );
 }

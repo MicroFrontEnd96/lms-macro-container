@@ -1,6 +1,6 @@
 import React from 'react';
 
-renderMicroFrontend = (name, history) => {
+const renderMicroFrontend = (name, history) => {
     window[`render${name}`](`${name}-container`, history);
 };
 
@@ -8,7 +8,7 @@ export const MicroFrontEnd = ({ name, host, history }) => {
     React.useEffect(() => {
         const scriptId = `micro-frontend-script-${name}`;
         if (document.getElementById(scriptId)) {
-            this.renderMicroFrontend(name, history);
+            renderMicroFrontend(name, history);
             return;
         }
 
@@ -19,7 +19,7 @@ export const MicroFrontEnd = ({ name, host, history }) => {
                 script.id = scriptId;
                 script.crossOrigin = '';
                 script.src = `${host}${manifest['main.js']}`;
-                script.onload = this.renderMicroFrontend;
+                script.onload = renderMicroFrontend;
                 document.head.appendChild(script);
             });
         return () => {
@@ -27,6 +27,6 @@ export const MicroFrontEnd = ({ name, host, history }) => {
         }
     }, [])
 
-    return <main id={`${this.props.name}-container`} />;
+    return <main id={`${name}-container`} />;
 }
 
