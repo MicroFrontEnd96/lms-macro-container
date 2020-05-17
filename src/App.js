@@ -23,7 +23,7 @@ function App() {
         {/* <AppHeader /> */}
         <Switch>
           <Route exact path="/" component={Leave} />
-          <Route exact path="/restaurant/:id" component={Sprint} />
+          <Route exact path="/sprint/:month" component={Sprint} />
         </Switch>
       </div>
     </BrowserRouter>
